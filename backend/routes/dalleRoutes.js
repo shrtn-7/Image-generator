@@ -1,37 +1,42 @@
 import express from 'express';
 import * as dotenv from 'dotenv';
-import { Configuration, OpenAIApi } from 'openai';
+import axios from 'axios';
 
 dotenv.config();
 
 const router = express.Router();
 
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
-const openai = new OpenAIApi(configuration);
-
 router.route('/').get((req, res) => {
-  res.status(200).json({ message: 'Hello from DALL-E!' });
+  res.status(200).json({ message: 'Hello from Stable Diffusion!' });
 });
 
 router.route('/').post(async (req, res) => {
   try {
     const { prompt } = req.body;
 
-    const aiResponse = await openai.createImage({
-      prompt,
-      n: 1,
-      size: '1024x1024',
-      response_format: 'b64_json',
-    });
+    const response = await axios.post(
+      'https://api-inference.huggingface.co/models/CompVis/stable-diffusion-v1-4',
+      {
+        inputs: prompt,
+        parameters: {
+          num_inference_steps: 50,
+          guidance_scale: 7.5,
+        },
+        options: { wait_for_model: true },
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.HUGGINGFACE_API_KEY}`,
+        },
+        responseType: 'arraybuffer', // ensure we get binary data
+      }
+    );
 
-    const image = aiResponse.data.data[0].b64_json;
-    res.status(200).json({ photo: image });
+    const imageBase64 = Buffer.from(response.data, 'binary').toString('base64');
+    res.status(200).json({ photo: imageBase64 });
   } catch (error) {
     console.error(error);
-    res.status(500).send(error?.response.data.error.message || 'Something went wrong');
+    res.status(500).send(error?.response?.data || 'Something went wrong');
   }
 });
 
