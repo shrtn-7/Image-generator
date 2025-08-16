@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Form = () => {
+const Result = () => {
   return (
     <div>
-      Form
+      Result Page
     </div>
   )
 }
 
-export default Form
+export default Result
