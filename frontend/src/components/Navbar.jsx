@@ -20,7 +20,7 @@ const Navbar = () => {
           Home
         </Link>
         <Link to='/result' className='text-gray-300 hover:text-white transition-colors duration-300 font-medium'>
-          Gallery
+          Generate
         </Link>
         <a href='#pricing' className='text-gray-300 hover:text-white transition-colors duration-300 font-medium'>
           Pricing
