@@ -1,0 +1,19 @@
+
+@keyframes loader {
+	0% {
+		width: 0%;
+		opacity: 0.7;
+	}
+	60% {
+		width: 80%;
+		opacity: 1;
+	}
+	100% {
+		width: 100%;
+		opacity: 0.7;
+	}
+}
+
+.animate-loader {
+	animation: loader 2.5s linear;
+}

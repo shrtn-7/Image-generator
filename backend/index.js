@@ -1,33 +1,30 @@
-import express from 'express';
-import * as dotenv from 'dotenv';
-import cors from 'cors';
-
-import connectDB from './mongodb/connect.js';
-import postRoutes from './routes/postRoutes.js';
-import imgRoutes from './routes/imgRoutes.js';
-
-dotenv.config();
+import express from "express";
+import { Client } from "@gradio/client";
+import cors from "cors";
 
 const app = express();
 app.use(cors());
-app.use(express.json({ limit: '50mb' }));
+app.use(express.json());
 
-app.use('/api/v1/post', postRoutes);
-app.use('/api/v1/img', imgRoutes);
+// Your Hugging Face Space
+const SPACE_ID = "shrtn-74/my_txt2img";
 
-app.get('/', async (req, res) => {
-  res.status(200).json({
-    message: 'Hello world',
-  });
+app.post("/generate", async (req, res) => {
+  const { input } = req.body;
+
+  try {
+    const client = await Client.connect(SPACE_ID);
+    const result = await client.predict("/predict", { prompt: input });
+
+    const imageUrl = result.data[0].url;
+    console.log("Generated Image URL:", imageUrl);
+    res.json({ imageUrl });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to generate image" });
+  }
 });
 
-const startServer = async () => {
-  try {
-    connectDB(process.env.MONGODB_URL);
-    app.listen(8080, () => console.log('Server started on port 8080'));
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-startServer();
+app.listen(5000, () => {
+  console.log("Backend running on http://localhost:5000");
+});

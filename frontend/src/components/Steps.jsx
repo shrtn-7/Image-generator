@@ -1,7 +1,10 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { stepsData } from '../assets/assets'
 
 const Steps = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="relative py-20 px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20 overflow-hidden">
       {/* Floating Elements */}
@@ -86,7 +89,10 @@ const Steps = () => {
 
         {/* Bottom CTA */}
         <div className="text-center mt-16 relative z-10">
-          <button className="px-8 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold text-lg rounded-full hover:from-yellow-300 hover:to-orange-400 transition-all duration-300 transform hover:scale-105 shadow-xl">
+          <button 
+            onClick={() => navigate('/result')}
+            className="px-8 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold text-lg rounded-full hover:from-yellow-300 hover:to-orange-400 transition-all duration-300 transform hover:scale-105 shadow-xl"
+          >
             Start Creating Now
           </button>
         </div>

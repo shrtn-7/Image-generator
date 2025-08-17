@@ -1,7 +1,10 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { assets } from '../assets/assets'
 
 const Header = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="relative overflow-hidden py-20 px-4 sm:px-8 md:px-12 lg:px-16 xl:px-20">
       {/* Background decoration */}
@@ -30,7 +33,10 @@ const Header = () => {
         
         {/* CTA buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-          <button className="px-8 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold text-lg rounded-full hover:from-yellow-300 hover:to-orange-400 transition-all duration-300 transform hover:scale-105 shadow-xl">
+          <button 
+            onClick={() => navigate('/result')}
+            className="px-8 py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold text-lg rounded-full hover:from-yellow-300 hover:to-orange-400 transition-all duration-300 transform hover:scale-105 shadow-xl"
+          >
             Start Creating Now
           </button>
           <button className="px-8 py-4 border-2 border-white text-white font-semibold text-lg rounded-full hover:bg-white hover:text-black transition-all duration-300">
