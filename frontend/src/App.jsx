@@ -2,6 +2,7 @@ import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Result from './pages/Result'
+import Library from './pages/Library'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 
@@ -12,6 +13,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/result" element={<Result />} />
+        <Route path="/library" element={<Library />} />
       </Routes>
       <Footer />
     </div>

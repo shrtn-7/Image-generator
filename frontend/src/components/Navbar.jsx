@@ -22,9 +22,9 @@ const Navbar = () => {
         <Link to='/result' className='text-gray-300 hover:text-white transition-colors duration-300 font-medium'>
           Generate
         </Link>
-        <a href='#pricing' className='text-gray-300 hover:text-white transition-colors duration-300 font-medium'>
-          Pricing
-        </a>
+        <Link to='/library' className='text-gray-300 hover:text-white transition-colors duration-300 font-medium'>
+          Library
+        </Link>
         <a href='#contact' className='text-gray-300 hover:text-white transition-colors duration-300 font-medium'>
           Contact
         </a>
@@ -58,10 +58,7 @@ const Navbar = () => {
                       Profile Settings
                     </li>
                     <li className='text-gray-700 hover:text-blue-600 cursor-pointer py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors duration-200 text-sm font-medium'>
-                      My Images
-                    </li>
-                    <li className='text-gray-700 hover:text-blue-600 cursor-pointer py-2 px-3 rounded-lg hover:bg-blue-50 transition-colors duration-200 text-sm font-medium'>
-                      Upgrade Plan
+                      <Link to='/library'>My Library</Link>
                     </li>
                     <li className='text-red-600 hover:text-red-700 cursor-pointer py-2 px-3 rounded-lg hover:bg-red-50 transition-colors duration-200 text-sm font-medium border-t border-gray-200 pt-2 mt-2'>
                       Logout
